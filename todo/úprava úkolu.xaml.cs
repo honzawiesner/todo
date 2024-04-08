@@ -32,7 +32,7 @@ namespace todo
 
         private void editTask_Click(object sender, RoutedEventArgs e)
         {
-            if (taskName.Text.Length > 3 && !string.IsNullOrEmpty(taskDate.Text) && taskDescription.Text.Length < 50)
+            if (taskName.Text.Length > 2 && !string.IsNullOrEmpty(taskDate.Text) && taskDescription.Text.Length < 50)
             {
                 string t = taskName.Text + "," + taskDate.Text + "," + taskDescription.Text + "\n";
                 File.AppendAllText("tasks.txt", t);

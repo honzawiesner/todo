@@ -42,6 +42,7 @@ namespace todo
         {
             stackP.Children.Clear();
             string[] s = File.ReadAllLines("tasks.txt");
+            deleteButtons.Clear();
 
             foreach (string s2 in s)
             {
@@ -60,17 +61,20 @@ namespace todo
             mainGrid.Height = 70;
 
             ColumnDefinition column1 = new ColumnDefinition();
-            column1.Width = new GridLength(8, GridUnitType.Star);
+            column1.Width = new GridLength(1, GridUnitType.Star);
             ColumnDefinition column2 = new ColumnDefinition();
-            column2.Width = new GridLength(1, GridUnitType.Star);
+            column2.Width = new GridLength(8, GridUnitType.Star);
             ColumnDefinition column3 = new ColumnDefinition();
             column3.Width = new GridLength(1, GridUnitType.Star);
+            ColumnDefinition column4 = new ColumnDefinition();
+            column4.Width = new GridLength(1, GridUnitType.Star);
             mainGrid.ColumnDefinitions.Add(column1);
             mainGrid.ColumnDefinitions.Add(column2);
             mainGrid.ColumnDefinitions.Add(column3);
+            mainGrid.ColumnDefinitions.Add(column4);
 
             Grid nestedGrid = new Grid();
-            Grid.SetColumn(nestedGrid, 0);
+            Grid.SetColumn(nestedGrid, 1);
 
             ColumnDefinition nestedColumn1 = new ColumnDefinition();
             nestedColumn1.Width = new GridLength(1, GridUnitType.Star);
@@ -137,8 +141,8 @@ namespace todo
             deleteButtons.Add(deleteButton);
             deleteButton.Resources.Add(typeof(Border), new Style { TargetType = typeof(Border), Setters = { new Setter { Property = Border.CornerRadiusProperty, Value = new CornerRadius(50) } } });
 
-            Grid.SetColumn(editButton, 1);
-            Grid.SetColumn(deleteButton, 2);
+            Grid.SetColumn(editButton, 2);
+            Grid.SetColumn(deleteButton, 3);
 
             mainGrid.Children.Add(nestedGrid);
             mainGrid.Children.Add(editButton);
