@@ -5,18 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:todo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" MinHeight="350" MinWidth="550">
+        Title="MainWindow" Height="450" Width="800" MinHeight="350" MinWidth="600">
 
     <Window.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
-            <Setter Property="Width" Value="50" />
-            <Setter Property="Height" Value="50" />
+            <Setter Property="Width" Value="65" />
+            <Setter Property="Height" Value="32" />
             <Setter Property="Background" Value="White" />
             <Setter Property="Cursor" Value="Hand" />
-        </Style>
-        <Style x:Key="=LabelStyle" TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Right" />
             <Style.Resources>
-                
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="7"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="7"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                    </TransformGroup>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="7"/>
+                </Style>
             </Style.Resources>
         </Style>
     </Window.Resources>
@@ -29,95 +58,38 @@
             </Grid.RowDefinitions>
 
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <StackPanel Name="stackP" ScrollViewer.VerticalScrollBarVisibility="Auto" CanVerticallyScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
-                    
-                    <!--<Border BorderThickness="0 0 0 1" BorderBrush="Black">
-                        <Grid Height="70" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="6*"/>
-                                <ColumnDefinition Width="36*"/>
-                                <ColumnDefinition Width="6*"/>
-                                <ColumnDefinition Width="6*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Background="Red"/>
-                            <CheckBox Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <CheckBox.LayoutTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </CheckBox.LayoutTransform>
-                            </CheckBox>
-                            <Grid Grid.Column="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="2*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="1" Text="popis"/>
-                                <Grid Grid.Column="0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Text="název"/>
-                                    <TextBlock Grid.Row="2" Text="datum"/>
-                                </Grid>
-
-                            </Grid>
-                            <Button Content="✎" Grid.Column="3" Width="50" Height="50" FontSize="30" Background="White">
-                                <Button.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="100"/>
-                                    </Style>
-                                </Button.Resources>
-                            </Button>
-                            <Button Content="🗑️" Grid.Column="4" Width="50" Height="50" FontSize="20" Background="White">
-                                <Button.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="100"/>
-                                    </Style>
-                                </Button.Resources>
-                            </Button>
-                        </Grid>
-                    </Border>-->
-
-                </StackPanel>
+                <StackPanel Name="stackP" ScrollViewer.VerticalScrollBarVisibility="Auto" CanVerticallyScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True"></StackPanel>
             </ScrollViewer>
 
             <Border Grid.Row="1" BorderThickness="0 1 0 0" BorderBrush="Black" >
                 <Grid >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="8*"/>
-                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="24*"/>
+                        <ColumnDefinition Width="12*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="10*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="10*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="4*"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="4*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="1" Content="Osobní" Background="LimeGreen" Foreground="White"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        <Label Grid.Row="3" Content="Práce" Background="RoyalBlue" Foreground="White"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        <Label Grid.Row="1" Grid.Column="2" Content="Škola" Background="IndianRed" Foreground="White"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        <Label Grid.Row="3" Grid.Column="2" Content="Jiné" Background="Yellow"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <Label Style="{StaticResource LabelStyle}" Grid.Column="0" Content="Osobní" Background="LimeGreen"/>
+                        <Label Style="{StaticResource LabelStyle}" Grid.Column="2" Content="Práce" Background="RoyalBlue"/>
+                        <Label Style="{StaticResource LabelStyle}" Grid.Column="4" Content="Škola" Background="IndianRed"/>
+                        <Label Style="{StaticResource LabelStyle}" Grid.Column="6" Content="Jiné" Background="Yellow" Foreground="Black"/>
                     </Grid>
-                    
 
-                    <Button Cursor="Hand" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120" Content="➕ Nový úkol  " Foreground="White" BorderBrush="White" Name="newTask" Background="Black" Click="newTask_Click">
+
+                    <Button  Cursor="Hand" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" Height="30" Width="120" Content="➕ Nový úkol  " Foreground="White" BorderBrush="White" Name="newTask" Background="Black" Click="newTask_Click">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="7"/>

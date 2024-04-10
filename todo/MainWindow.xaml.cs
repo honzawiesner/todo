@@ -34,8 +34,9 @@ namespace todo
         private void newTask_Click(object sender, RoutedEventArgs e)
         {
             tvorba_úkolu tvorba_Úkolu = new tvorba_úkolu();
-            tvorba_Úkolu.Show();
-            Close();
+            tvorba_Úkolu.ShowDialog();
+
+            writeOut();
         }
 
         public void writeOut()
@@ -45,6 +46,8 @@ namespace todo
             else{File.Create("tasks.txt");}
 
             string[] s = File.ReadAllLines("tasks.txt");
+
+            editButtons.Clear();
             deleteButtons.Clear();
 
             foreach (string s2 in s)
@@ -61,24 +64,21 @@ namespace todo
             border.BorderBrush = Brushes.DarkGray;
 
             Grid mainGrid = new Grid();
-            mainGrid.Height = 70;
+            mainGrid.Height = 80;
 
             ColumnDefinition column1 = new ColumnDefinition();
             column1.Width = new GridLength(1, GridUnitType.Star);
             ColumnDefinition column2 = new ColumnDefinition();
-            column2.Width = new GridLength(12, GridUnitType.Star);
+            column2.Width = new GridLength(90, GridUnitType.Star);
             ColumnDefinition column3 = new ColumnDefinition();
-            column3.Width = new GridLength(72, GridUnitType.Star);
+            column3.Width = new GridLength(12, GridUnitType.Star);
             ColumnDefinition column4 = new ColumnDefinition();
-            column4.Width = new GridLength(12, GridUnitType.Star);
-            ColumnDefinition column5 = new ColumnDefinition();
-            column5.Width = new GridLength(12, GridUnitType.Star);
+            column4.Width = new GridLength(1, GridUnitType.Star);
 
             mainGrid.ColumnDefinitions.Add(column1);
             mainGrid.ColumnDefinitions.Add(column2);
             mainGrid.ColumnDefinitions.Add(column3);
             mainGrid.ColumnDefinitions.Add(column4);
-            mainGrid.ColumnDefinitions.Add(column5);
 
             TextBlock textBlock = new TextBlock();
             Grid.SetColumn(textBlock, 0);
@@ -87,31 +87,29 @@ namespace todo
             {
                 case "Škola":
                     textBlock.Background = Brushes.IndianRed;
-                    mainGrid.Children.Add(textBlock);
                     break;
                 case "Osobní":
                     textBlock.Background = Brushes.LimeGreen;
-                    mainGrid.Children.Add(textBlock);
                     break;
                 case "Práce":
                     textBlock.Background = Brushes.RoyalBlue;
-                    mainGrid.Children.Add(textBlock);
                     break;
                 case "Jiné":
                     textBlock.Background = Brushes.Yellow;
-                    mainGrid.Children.Add(textBlock);
                     break;
                 default:
                     break;
             }
 
+            mainGrid.Children.Add(textBlock);
+
             Grid nestedGrid = new Grid();
-            Grid.SetColumn(nestedGrid, 2);
+            Grid.SetColumn(nestedGrid, 1);
 
             ColumnDefinition nestedColumn1 = new ColumnDefinition();
-            nestedColumn1.Width = new GridLength(1, GridUnitType.Star);
+            nestedColumn1.Width = new GridLength(2, GridUnitType.Star);
             ColumnDefinition nestedColumn2 = new ColumnDefinition();
-            nestedColumn2.Width = new GridLength(1, GridUnitType.Star);
+            nestedColumn2.Width = new GridLength(3, GridUnitType.Star);
             nestedGrid.ColumnDefinitions.Add(nestedColumn1);
             nestedGrid.ColumnDefinitions.Add(nestedColumn2);
 
@@ -144,37 +142,62 @@ namespace todo
             nameDateGrid.Children.Add(nameTextBlock);
             nameDateGrid.Children.Add(dateTextBlock);
 
+            Grid descriptionGrid = new Grid();
+            Grid.SetColumn(descriptionGrid, 1);
+
+            RowDefinition row3 = new RowDefinition();
+            row3.Height = new GridLength(1, GridUnitType.Star);
+            RowDefinition row4 = new RowDefinition();
+            row4.Height = new GridLength(7, GridUnitType.Star);
+            RowDefinition row5 = new RowDefinition();
+            row5.Height = new GridLength(1, GridUnitType.Star);
+            descriptionGrid.RowDefinitions.Add(row3);
+            descriptionGrid.RowDefinitions.Add(row4);
+            descriptionGrid.RowDefinitions.Add(row5);
+
             TextBlock descriptionTextBlock = new TextBlock();
             descriptionTextBlock.Text = splt[2];
-            Grid.SetColumn(descriptionTextBlock, 1);
+            descriptionTextBlock.TextWrapping = TextWrapping.Wrap;
+            descriptionTextBlock.VerticalAlignment = VerticalAlignment.Center;
+            Grid.SetRow(descriptionTextBlock, 1);
+
+            descriptionGrid.Children.Add(descriptionTextBlock);
 
             nestedGrid.Children.Add(nameDateGrid);
-            nestedGrid.Children.Add(descriptionTextBlock);
+            nestedGrid.Children.Add(descriptionGrid);
+
+            Grid buttonGrid = new Grid();
+            Grid.SetColumn(buttonGrid, 2);
+
+            RowDefinition row6 = new RowDefinition();
+            RowDefinition row7 = new RowDefinition();
+            buttonGrid.RowDefinitions.Add(row6);
+            buttonGrid.RowDefinitions.Add(row7);
 
             Style buttonStyle = (Style)FindResource("ButtonStyle");
 
             Button editButton = new Button();
             editButton.Content = "✎";
-            editButton.FontSize = 20;
+            editButton.FontSize = 15;
             editButton.Style = buttonStyle;
             editButton.Click += EditButton_Click;
             editButtons.Add(editButton);
-            editButton.Resources.Add(typeof(Border), new Style { TargetType = typeof(Border), Setters = { new Setter { Property = Border.CornerRadiusProperty, Value = new CornerRadius(50) } } });
 
             Button deleteButton = new Button();
             deleteButton.Content = "🗑";
-            deleteButton.FontSize = 14;
+            deleteButton.FontSize = 10;
             deleteButton.Style = buttonStyle;
             deleteButton.Click += DeleteButton_Click;
             deleteButtons.Add(deleteButton);
-            deleteButton.Resources.Add(typeof(Border), new Style { TargetType = typeof(Border), Setters = { new Setter { Property = Border.CornerRadiusProperty, Value = new CornerRadius(50) } } });
 
-            Grid.SetColumn(editButton, 3);
-            Grid.SetColumn(deleteButton, 4);
+            Grid.SetRow(editButton, 0);
+            Grid.SetRow(deleteButton, 1);
+
+            buttonGrid.Children.Add(editButton);
+            buttonGrid.Children.Add(deleteButton);
 
             mainGrid.Children.Add(nestedGrid);
-            mainGrid.Children.Add(editButton);
-            mainGrid.Children.Add(deleteButton);
+            mainGrid.Children.Add(buttonGrid);
 
             border.Child = mainGrid;
 
@@ -188,8 +211,9 @@ namespace todo
             string[] s = File.ReadAllLines("tasks.txt");
 
             úprava_úkolu úprava_Úkolu = new úprava_úkolu(s[index], index);
-            úprava_Úkolu.Show();
-            Close();
+            úprava_Úkolu.ShowDialog();
+
+            writeOut();
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -200,6 +224,7 @@ namespace todo
             List<string> lines = new List<string>(File.ReadAllLines("tasks.txt"));
             lines.RemoveAt(index);
             File.WriteAllLines("tasks.txt", lines);
+
             writeOut();
         }
     }

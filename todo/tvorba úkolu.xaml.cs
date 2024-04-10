@@ -24,12 +24,11 @@ namespace todo
 
         private void newTask_Click(object sender, RoutedEventArgs e)
         {
-            if (taskName.Text.Length > 2 && !string.IsNullOrEmpty(taskDate.Text) && taskDescription.Text.Length < 50 && !string.IsNullOrEmpty(taskType.Text) && !taskName.Text.Contains("*") && !taskDate.Text.Contains("*") && !taskDescription.Text.Contains("*") && !taskType.Text.Contains("*"))
+            if (taskName.Text.Length > 2 && !string.IsNullOrEmpty(taskDate.Text) && taskDescription.Text.Length < 201 && !string.IsNullOrEmpty(taskType.Text) && !taskName.Text.Contains("*") && !taskDate.Text.Contains("*") && !taskDescription.Text.Contains("*") && !taskType.Text.Contains("*"))
             {
                 string t = taskName.Text + "*" + taskDate.Text + "*" + taskDescription.Text + "*" + taskType.Text + "\n";
                 File.AppendAllText("tasks.txt", t);
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
+
                 Close();
             }
             else
@@ -38,7 +37,7 @@ namespace todo
 
                 taskDateLabel.Content = (string.IsNullOrEmpty(taskDate.Text) || taskDate.Text.Contains("*")) ? (string.IsNullOrEmpty(taskDate.Text) ? "Příliš krátké" : "Nesmí obsahovat *") : "";
 
-                taskDescriptionLabel.Content = (taskDescription.Text.Length > 50 || taskDescription.Text.Contains("*")) ? (taskDescription.Text.Length > 50 ? "Příliš dlouhé" : "Nesmí obsahovat *") : "";
+                taskDescriptionLabel.Content = (taskDescription.Text.Length > 200 || taskDescription.Text.Contains("*")) ? (taskDescription.Text.Length > 50 ? "Příliš dlouhé" : "Nesmí obsahovat *") : "";
 
                 taskTypeLabel.Content = (taskType.Text.Length == 0 || taskType.Text.Contains("*")) ? (taskType.Text.Length == 0 ? "Vyplňte prosím" : "Nesmí obsahovat *") : "";
             }
