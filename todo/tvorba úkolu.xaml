@@ -20,6 +20,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.Column="1" Content="Název úkolu:" VerticalContentAlignment="Bottom" Margin="-5,0,0,0"/>
@@ -34,6 +36,14 @@
         <Label Grid.Row="4" Grid.Column="1" Content="" VerticalContentAlignment="Bottom" Margin="-5,0,0,0" HorizontalAlignment="Right" Name="taskDescriptionLabel" Foreground="Red"/>
         <TextBox Grid.Row="5" Grid.Column="1" Width="auto" Height="25" VerticalAlignment="Top" VerticalContentAlignment="Center" Name="taskDescription" />
 
+        <Label Grid.Row="6" Grid.Column="1" Content="Vyber typ:" VerticalContentAlignment="Bottom" Margin="-5,0,0,0"/>
+        <Label Grid.Row="6" Grid.Column="1" Content="" VerticalContentAlignment="Bottom" Margin="-5,0,0,0" HorizontalAlignment="Right" Name="taskTypeLabel" Foreground="Red"/>
+        <ComboBox Grid.Row="7" Grid.Column="1" Width="auto" Height="25" VerticalAlignment="Top" VerticalContentAlignment="Center" Name="taskType">
+            <ComboBoxItem Content="Škola"/>
+            <ComboBoxItem Content="Osobní"/>
+            <ComboBoxItem Content="Práce"/>
+        </ComboBox>
+        
         <Button Grid.Row="8" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="150" Content="Přidat úkol" Foreground="White" BorderBrush="White" Name="newTask" Background="Black" Click="newTask_Click">
             <Button.Resources>
                 <Style TargetType="Border">
