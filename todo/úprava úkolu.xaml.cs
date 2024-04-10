@@ -22,19 +22,19 @@ namespace todo
         public úprava_úkolu(string task, int index2)
         {
             InitializeComponent();
-            string[] splt = task.Split(',');
+            string[] splt = task.Split('*');
             taskName.Text = splt[0];
             taskDate.Text = splt[1];
             taskDescription.Text = splt[2];
+            taskType.Text = splt[3];
             index = index2;
-
         }
 
         private void editTask_Click(object sender, RoutedEventArgs e)
         {
-            if (taskName.Text.Length > 2 && !string.IsNullOrEmpty(taskDate.Text) && taskDescription.Text.Length < 50)
+            if (taskName.Text.Length > 2 && !string.IsNullOrEmpty(taskDate.Text) && taskDescription.Text.Length < 50 && !taskName.Text.Contains("*") && !taskDate.Text.Contains("*") && !taskDescription.Text.Contains("*") && !taskType.Text.Contains("*"))
             {
-                string t = taskName.Text + "," + taskDate.Text + "," + taskDescription.Text + "\n";
+                string t = taskName.Text + "*" + taskDate.Text + "*" + taskDescription.Text + "*" + taskType.Text + "\n";
                 File.AppendAllText("tasks.txt", t);
                 List<string> lines = new List<string>(File.ReadAllLines("tasks.txt"));
                 lines.RemoveAt(index);
@@ -46,9 +46,13 @@ namespace todo
             }
             else
             {
-                if (taskName.Text.Length < 3) { taskNameLabel.Content = "Příliš krátké"; } else { taskNameLabel.Content = ""; }
-                if (string.IsNullOrEmpty(taskDate.Text)) { taskDateLabel.Content = "Příliš krátké"; } else { taskDateLabel.Content = ""; }
-                if (taskDescription.Text.Length > 50) { taskDescriptionLabel.Content = "Příliš dlouhé"; } else { taskDescriptionLabel.Content = ""; }
+                taskNameLabel.Content = (taskName.Text.Length < 3 || taskName.Text.Contains("*")) ? (taskName.Text.Length < 3 ? "Příliš krátké" : "Nesmí obsahovat *") : "";
+
+                taskDateLabel.Content = (string.IsNullOrEmpty(taskDate.Text) || taskDate.Text.Contains("*")) ? (string.IsNullOrEmpty(taskDate.Text) ? "Příliš krátké" : "Nesmí obsahovat *") : "";
+
+                taskDescriptionLabel.Content = (taskDescription.Text.Length > 50 || taskDescription.Text.Contains("*")) ? (taskDescription.Text.Length > 50 ? "Příliš dlouhé" : "Nesmí obsahovat *") : "";
+
+                taskTypeLabel.Content = (taskType.Text.Length == 0 || taskType.Text.Contains("*")) ? (taskType.Text.Length == 0 ? "Vyplňte prosím" : "Nesmí obsahovat *") : "";
             }
         }
     }

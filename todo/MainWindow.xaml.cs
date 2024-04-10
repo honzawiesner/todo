@@ -49,7 +49,7 @@ namespace todo
 
             foreach (string s2 in s)
             {
-                string[] splt = s2.Split(',');
+                string[] splt = s2.Split('*');
                 makeTask(splt);
             }
         }
@@ -122,24 +122,20 @@ namespace todo
             nestedGrid.Children.Add(nameDateGrid);
             nestedGrid.Children.Add(descriptionTextBlock);
 
+            Style buttonStyle = (Style)FindResource("ButtonStyle");
+
             Button editButton = new Button();
             editButton.Content = "✎";
-            editButton.Width = 50;
-            editButton.Height = 50;
             editButton.FontSize = 20;
-            editButton.Background = Brushes.White;
-            editButton.Cursor = Cursors.Hand;
+            editButton.Style = buttonStyle;
             editButton.Click += EditButton_Click;
             editButtons.Add(editButton);
             editButton.Resources.Add(typeof(Border), new Style { TargetType = typeof(Border), Setters = { new Setter { Property = Border.CornerRadiusProperty, Value = new CornerRadius(50) } } });
 
             Button deleteButton = new Button();
-            deleteButton.Content = "🗑️";
-            deleteButton.Width = 50;
-            deleteButton.Height = 50;
+            deleteButton.Content = "🗑";
             deleteButton.FontSize = 14;
-            deleteButton.Background = Brushes.White;
-            deleteButton.Cursor = Cursors.Hand;
+            deleteButton.Style = buttonStyle;
             deleteButton.Click += DeleteButton_Click;
             deleteButtons.Add(deleteButton);
             deleteButton.Resources.Add(typeof(Border), new Style { TargetType = typeof(Border), Setters = { new Setter { Property = Border.CornerRadiusProperty, Value = new CornerRadius(50) } } });
