@@ -39,9 +39,10 @@
         <Label Grid.Row="6" Grid.Column="1" Content="Vyber typ:" VerticalContentAlignment="Bottom" Margin="-5,0,0,0"/>
         <Label Grid.Row="6" Grid.Column="1" Content="" VerticalContentAlignment="Bottom" Margin="-5,0,0,0" HorizontalAlignment="Right" Name="taskTypeLabel" Foreground="Red"/>
         <ComboBox Grid.Row="7" Grid.Column="1" Width="auto" Height="25" VerticalAlignment="Top" VerticalContentAlignment="Center" Name="taskType">
-            <ComboBoxItem Content="Škola"/>
             <ComboBoxItem Content="Osobní"/>
             <ComboBoxItem Content="Práce"/>
+            <ComboBoxItem Content="Škola"/>
+            <ComboBoxItem Content="Jiné"/>
         </ComboBox>
         
         <Button Grid.Row="8" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="150" Content="Přidat úkol" Foreground="White" BorderBrush="White" Name="newTask" Background="Black" Click="newTask_Click">

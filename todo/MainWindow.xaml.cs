@@ -66,18 +66,47 @@ namespace todo
             ColumnDefinition column1 = new ColumnDefinition();
             column1.Width = new GridLength(1, GridUnitType.Star);
             ColumnDefinition column2 = new ColumnDefinition();
-            column2.Width = new GridLength(8, GridUnitType.Star);
+            column2.Width = new GridLength(12, GridUnitType.Star);
             ColumnDefinition column3 = new ColumnDefinition();
-            column3.Width = new GridLength(1, GridUnitType.Star);
+            column3.Width = new GridLength(72, GridUnitType.Star);
             ColumnDefinition column4 = new ColumnDefinition();
-            column4.Width = new GridLength(1, GridUnitType.Star);
+            column4.Width = new GridLength(12, GridUnitType.Star);
+            ColumnDefinition column5 = new ColumnDefinition();
+            column5.Width = new GridLength(12, GridUnitType.Star);
+
             mainGrid.ColumnDefinitions.Add(column1);
             mainGrid.ColumnDefinitions.Add(column2);
             mainGrid.ColumnDefinitions.Add(column3);
             mainGrid.ColumnDefinitions.Add(column4);
+            mainGrid.ColumnDefinitions.Add(column5);
+
+            TextBlock textBlock = new TextBlock();
+            Grid.SetColumn(textBlock, 0);
+
+            switch (splt[3])
+            {
+                case "Škola":
+                    textBlock.Background = Brushes.IndianRed;
+                    mainGrid.Children.Add(textBlock);
+                    break;
+                case "Osobní":
+                    textBlock.Background = Brushes.LimeGreen;
+                    mainGrid.Children.Add(textBlock);
+                    break;
+                case "Práce":
+                    textBlock.Background = Brushes.RoyalBlue;
+                    mainGrid.Children.Add(textBlock);
+                    break;
+                case "Jiné":
+                    textBlock.Background = Brushes.Yellow;
+                    mainGrid.Children.Add(textBlock);
+                    break;
+                default:
+                    break;
+            }
 
             Grid nestedGrid = new Grid();
-            Grid.SetColumn(nestedGrid, 1);
+            Grid.SetColumn(nestedGrid, 2);
 
             ColumnDefinition nestedColumn1 = new ColumnDefinition();
             nestedColumn1.Width = new GridLength(1, GridUnitType.Star);
@@ -140,8 +169,8 @@ namespace todo
             deleteButtons.Add(deleteButton);
             deleteButton.Resources.Add(typeof(Border), new Style { TargetType = typeof(Border), Setters = { new Setter { Property = Border.CornerRadiusProperty, Value = new CornerRadius(50) } } });
 
-            Grid.SetColumn(editButton, 2);
-            Grid.SetColumn(deleteButton, 3);
+            Grid.SetColumn(editButton, 3);
+            Grid.SetColumn(deleteButton, 4);
 
             mainGrid.Children.Add(nestedGrid);
             mainGrid.Children.Add(editButton);

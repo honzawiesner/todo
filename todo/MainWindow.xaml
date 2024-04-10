@@ -14,12 +14,17 @@
             <Setter Property="Background" Value="White" />
             <Setter Property="Cursor" Value="Hand" />
         </Style>
+        <Style x:Key="=LabelStyle" TargetType="Label">
+            <Style.Resources>
+                
+            </Style.Resources>
+        </Style>
     </Window.Resources>
 
     <Grid>
         <Grid ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="8*"/>
+                <RowDefinition Height="5*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -31,10 +36,12 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="6*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="36*"/>
+                                <ColumnDefinition Width="6*"/>
+                                <ColumnDefinition Width="6*"/>
                             </Grid.ColumnDefinitions>
-                            <CheckBox Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Grid.Column="0" Background="Red"/>
+                            <CheckBox Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <CheckBox.LayoutTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
@@ -44,7 +51,7 @@
                                     </TransformGroup>
                                 </CheckBox.LayoutTransform>
                             </CheckBox>
-                            <Grid Grid.Column="1">
+                            <Grid Grid.Column="2">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="2*"/>
@@ -60,14 +67,14 @@
                                 </Grid>
 
                             </Grid>
-                            <Button Content="✎" Grid.Column="2" Width="50" Height="50" FontSize="30" Background="White">
+                            <Button Content="✎" Grid.Column="3" Width="50" Height="50" FontSize="30" Background="White">
                                 <Button.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="100"/>
                                     </Style>
                                 </Button.Resources>
                             </Button>
-                            <Button Content="🗑️" Grid.Column="3" Width="50" Height="50" FontSize="20" Background="White">
+                            <Button Content="🗑️" Grid.Column="4" Width="50" Height="50" FontSize="20" Background="White">
                                 <Button.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="100"/>
@@ -83,11 +90,34 @@
             <Border Grid.Row="1" BorderThickness="0 1 0 0" BorderBrush="Black" >
                 <Grid >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Cursor="Hand" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120" Content="➕ Nový úkol  " Foreground="White" BorderBrush="White" Name="newTask" Background="Black" Click="newTask_Click">
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="10*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="10*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="1" Content="Osobní" Background="LimeGreen" Foreground="White"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <Label Grid.Row="3" Content="Práce" Background="RoyalBlue" Foreground="White"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <Label Grid.Row="1" Grid.Column="2" Content="Škola" Background="IndianRed" Foreground="White"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <Label Grid.Row="3" Grid.Column="2" Content="Jiné" Background="Yellow"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    </Grid>
+                    
+
+                    <Button Cursor="Hand" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120" Content="➕ Nový úkol  " Foreground="White" BorderBrush="White" Name="newTask" Background="Black" Click="newTask_Click">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="7"/>
