@@ -27,7 +27,9 @@ namespace todo
         {
             InitializeComponent();
 
-            writeOut();
+            if (File.Exists("tasks.txt")) { writeOut(); }
+            else { File.Create("tasks.txt"); writeOut(); }
+            
         }
 
 
@@ -42,8 +44,6 @@ namespace todo
         public void writeOut()
         {
             stackP.Children.Clear();
-            if (File.Exists("tasks.txt")){}
-            else{File.Create("tasks.txt");}
 
             string[] s = File.ReadAllLines("tasks.txt");
 
